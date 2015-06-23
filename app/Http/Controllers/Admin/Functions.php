@@ -13,7 +13,7 @@ class Functions {
 	public function DateStringToObject($datestring){
 		$date = new \Date();		
 		if ($datestring != null) {
-			$date = $date->createFromFormat('D M j Y H:i:s e T', $datestring);
+			$date = $date->createFromFormat('D M j Y H:i:s e+', $datestring);
 		}else{
 			return $datestring;
 		}
