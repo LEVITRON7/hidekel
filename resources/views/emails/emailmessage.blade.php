@@ -1,9 +1,10 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Nuevo mensaje</title>
+	<title>Nuevo Mensaje</title>
 </head>
 <body>
-	ss
+	<h2>{!!$title!!}</h2>
+	<p>{{$message_content}}</p>
 </body>
 </html>

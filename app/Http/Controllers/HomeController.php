@@ -72,26 +72,24 @@ class HomeController extends Controller {
 	{	
 		$array = $request->all();
 		// I'm creating an array with user's info but most likely you can use $user->email or pass $user object to closure later
-		$data = array(
-			'email'=>'yonny90_15@hotmail.com',
-			'name'=>'Info Hidekel',
-			'Detalles'	=>	$array['message'],
-			'Nombre'	=> $array['name']
+		$form = array(
+			'name'		=> 	$array['name'],
+			'email'		=> 	$array['email'],
+			'title'		=> 	$array['title'],
+			'to_email'	=>	'yonny90_15@hotmail.com'
 		);
+		$data = array(
+			'message_content'	=>	$array['message'],
+			'title'				=>	$array['title']
+		); 		
 		//dd($data);
-		/* use Mail::send function to send email passing the data and using the $user variable in the closure
-		\Mail::send(['emails.emailmessage'], $data, function($message) use ($user)
+		
+		\Mail::send('emails.emailmessage', $data, function($message) use ($form)
 		{
-		  //$message->from($array['email'], $array['title']);
-		  $message->to($user['email'], $user['name'])->subject('nada');
-		});*/
-
-            \Mail::send('emails.emailmessage', $data, function($message) use ($data)
-            {
-                $message->from('info@hidekel.org', "Site name");
-                $message->subject("Welcome to site name");
-                $message->to($data['email']);
-            });
+		    $message->from($form['email'], $form['name']);
+		    $message->subject($form['title']);
+		    $message->to($form['to_email']);
+		});
 			Session::flash('message', 'El mensaje se ha enviado correctamente');
 			return redirect('home/contact');
 	}

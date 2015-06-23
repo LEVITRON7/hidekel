@@ -11,14 +11,15 @@
         @foreach($slides as $image)
             @if($i==0)
                 <div class="item active">
-
-                    <img class="img" src=
+                <div class="slider-size">
+                    <img class="img " src=
                     @if ($image->file== '')
                         'http://placehold.it/1200x600'
                     @else
                         '/images/slides/{{$image->file}}'
                     @endif
                     >
+                </div>
                     <div class="container">
                         <div class="carousel-caption">
                             <h1>  {{ $image->title }} </h1>
@@ -39,13 +40,15 @@
                 </div>
             @else
                 <div class="item">
-                    <img class="img" src=
+                <div class="slider-size">
+                    <img class="img " src=
                     @if ($image->file== '')
                         'http://placehold.it/1200x600'
                     @else
                         '/images/slides/{{$image->file}}'
                     @endif
                     >
+                </div>
                     <div class="container">
                         <div class="carousel-caption">
                             <h1> {{ $image->title }} </h1>
@@ -101,7 +104,7 @@
 
             <h2>{{$club->type }}<br>{{$club->name}}</h2>
             <p style="text-align:justify">{!! str_limit($club->description,$limit = 100,'...') !!} </p>
-            <p><a class="btn btn-primary" href="" role="button"><i class="fa fa-eye"></i>Ver más</a></p>
+            <p><a class="btn btn-primary" href="{{ route('home.clubs.show',$club->id) }}" role="button"><i class="fa fa-eye"></i>Ver más</a></p>
         </div>
         @endforeach
     </center>

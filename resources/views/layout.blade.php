@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{{ $title or 'Default'}}</title>
+    <title>{{ $title or 'Hidekel (Clubes)'}}</title>
     <!-- Bootstrap Core CSS -->
         {!! Html::style('css/bootstrap.min.css') !!}
         {!! Html::style('css/bootstrap-social.css') !!}
@@ -50,7 +50,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse "  >                 
               <ul class="nav navbar-nav">
-                <li class=""><a class="" href="/"><img src="{{asset('images/icons/logo-hidekel-sm.png') }}" height="20" width="20"> </a></li>
+                <li class=""><a style="padding:0; padding-top:5px;" href="/"><img src="{{asset('images/icons/logo-hidekel-sm.png') }}" height="40" width="40"> </a></li>
                 <li class=""><a href="/">Inicio</a></li>
                 <li class="{{ (Request::is('events') ? 'active-nav' : '') }}"><a href="/events">Próximos eventos</a></li>
                 <li class="{{ (Request::is('activities') ? 'active-nav' : '') }}"><a href="/activities">Actividades</a></li>

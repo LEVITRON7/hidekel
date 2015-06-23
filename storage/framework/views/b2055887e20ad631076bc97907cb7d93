@@ -99,7 +99,7 @@
 
             <h2><?php echo e($club->type); ?><br><?php echo e($club->name); ?></h2>
             <p style="text-align:justify"><?php echo str_limit($club->description,$limit = 100,'...'); ?> </p>
-            <p><a class="btn btn-primary" href="" role="button"><i class="fa fa-eye"></i>Ver más</a></p>
+            <p><a class="btn btn-primary" href="<?php echo e(route('home.clubs.show',$club->id)); ?>" role="button"><i class="fa fa-eye"></i>Ver más</a></p>
         </div>
         <?php endforeach; ?>
     </center>

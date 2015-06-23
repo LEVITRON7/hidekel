@@ -49,7 +49,7 @@
                 </div>
             {!! Form::close() !!}
             <div class="col-md-8 col-centered text-center">
-            	<center><h5>Teléfonos</h5></center>
+            	{{-- <center><h5>Teléfonos</h5></center> --}}
             </div>
 </div>
   </div>

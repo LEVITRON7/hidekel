@@ -35,7 +35,7 @@
                             @endforeach
                         @endif                        
                         </div>                         
-                        <div class="col-md-12 row-centered">
+                        <div class=" ">
                         @if(count($club->classes) != 0)
                             <br>
                             <h3>Clases de club</h3>

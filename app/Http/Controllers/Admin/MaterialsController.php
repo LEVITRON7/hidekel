@@ -88,6 +88,10 @@ class MaterialsController extends Controller{
 			$filename = $functions->SaveFileToDisk($file,$material->logo,'/images/logos/');
 			$array['logo'] = $filename;
 		}
+		if($array['video'] != ''){
+			$array['file'] = $array['video'];
+			$array['extension'] = 'youtube.com';
+		}
 		$material = Material::create($array);
 		//dd($array);
 		//dd($event);
