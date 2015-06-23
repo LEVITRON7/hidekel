@@ -1,0 +1,46 @@
+    <?php if($Activities->total() > 0): ?>
+        <?php foreach($Activities as $event): ?>
+        <hr>
+            <div class="row" style="padding:10px">
+                <div class="col-md-3">
+                    <a href="">
+                        <center><img class="img-responsive img-max-list img-shadow" src= 
+                            <?php if($event->poster == ''): ?>
+                                'http://placehold.it/300x200'
+                            <?php else: ?>
+                                '/images/posters/<?php echo e($event->poster); ?>'
+                            <?php endif; ?>
+                        ></center>                            
+                    </a>
+                </div>
+                <div class="col-md-9 no-padding">
+                <div class="col-md-12 no-padding">
+                    <div class="col-md-8 no-padding"><h4 id='id' class="no-padding" style="margin-top: 0px;"><?php echo e($event->title); ?></h4></div>
+                    <div class="col-md-1 no-padding" style="color:#959595"> 
+                        <img src="/images/logos/<?php echo e($event->club->logo); ?>"  height="40" width="40">
+                    </div>
+                    <div class="col-md-3 no-padding" style="color:#959595"> <h4  class="defaultCountdown"  style="margin-top: 0px;  "><?php
+                        $datetime1 = new DateTime($event->datetime_end);
+                        $datetime2 = new DateTime('now');
+                        $interval = $datetime2->diff($datetime1);
+                        $days = $interval->format('%R%a días y %H horas');
+                         if($days < 0 ){
+                            echo $interval->format('Hace %a días');
+                        }                         
+                    ?></h4>
+                    </div>
+                </div>
+                    <h5 style="margin-top: 3px; margin-bottom:3px; font-style: oblique;"><?php echo e($event->address); ?></h5> <div style="color:#00A6FF;">  Del <?php echo e($event->date_between); ?></div>
+                    <p><?php echo e($event->description); ?></p>
+                    <a class="btn btn-primary" href=<?php echo e(route('activities.show', $event->id)); ?>><i class="fa fa-bars"></i>&nbsp;Detalles</a>
+                    <a class="btn btn-success" href=<?php echo e(route('activities.multimedias.show', $event->id)); ?>><i class="fa fa-play"></i>&nbsp;Ver multimedia</a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+            <center><?php echo $Activities->render(); ?>
+
+            <div style="float:right;"> Hay <?php echo e($Activities->total()); ?> registros</div>
+            </center>
+    <?php else: ?>
+            <h3>No hay ninguna actividad</h3>
+    <?php endif; ?>

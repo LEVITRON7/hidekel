@@ -1,0 +1,45 @@
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8">
+<!-- Team Members -->
+    <?php if(count($activities) != 0): ?>
+        <?php foreach($activities as $activity): ?>         
+            <div class="row">
+            <h3>$activity->title</h3>            
+                <div class="col-md-12 text-center">
+                <div class="row col-md-12" style=" margin: 0 auto;">                
+                    <?php if(count($activity->multimedia)!= 0): ?>
+                    <h3 style="margin-top:10px;">Fotos de la actividad</h3>
+                        <div id="links" >            
+                        <?php foreach($activity->multimedia as $foto): ?>
+                            <a href=/images/multimedia/<?php echo e($foto->file); ?>  data-gallery>
+                                <img  class='img-responsive img-same-size'  src=/images/multimedia/<?php echo e($foto->file); ?> alt=>
+                            </a>                                            
+                        <?php endforeach; ?>                    
+                        </div>
+                    <?php else: ?>                
+                    <h3>No hay fotos para mostrar</h3>
+                    <?php endif; ?>                
+                        <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-use-bootstrap-modal="false">
+                            <div class="slides"></div>
+                            <h3 class="title"></h3>
+                            <a class="prev">‹</a>
+                            <a class="next">›</a>
+                            <a class="close">×</a>
+                            <a class="play-pause"></a>
+                            <ol class="indicator"></ol>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+    <h3>No hay actividades ni multimedia</h3>
+    <?php endif; ?>
+
+        <!-- /.row -->
+        </div>
+    <?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

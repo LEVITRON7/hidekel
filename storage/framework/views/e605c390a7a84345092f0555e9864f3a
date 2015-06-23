@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><?php echo e(isset($title) ? $title : 'Default'); ?></title>
+    <!-- Bootstrap Core CSS -->
+        <?php echo Html::style('css/bootstrap.min.css'); ?>
+
+        <?php echo Html::style('css/bootstrap-social.css'); ?>
+
+
+        <?php echo Html::style('http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css'); ?>
+
+        <?php echo Html::style('css/bootstrap-image-gallery.min.css'); ?>
+
+    <!-- Custom CSS -->
+        
+        <?php echo Html::style('css/carousel.css'); ?>
+
+        <?php echo Html::style('css/countDown.css'); ?>
+
+        
+        <?php echo Html::style('css/fileinput.min.css'); ?>
+
+
+    <!-- Custom Fonts -->
+        <?php echo $__env->yieldContent('styles'); ?>
+        <?php echo Html::style('http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'); ?> 
+        <?php echo Html::style('css/styles.css'); ?>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+      <div class="container">
+        <nav class="navbar navbar-inverse navbar-static-top navbar-fixed-top navbar-custom">
+          <div class="container">
+            <div class="navbar-header" >
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse "  >                 
+              <ul class="nav navbar-nav">
+                <a class="navbar-brand" href="/">Hidekel</a>
+                <li class=""><a href="/app">Inicio</a></li>
+                <li class="<?php echo e((Request::is('events') ? 'active-nav' : '')); ?>"><a href="/events">Próximos eventos</a></li>
+                <li class="<?php echo e((Request::is('activities') ? 'active-nav' : '')); ?>"><a href="/activities">Actividades</a></li>
+                <li class="<?php echo e((Request::is('activities/multimedias') ? 'active-nav' : '')); ?>"><a href="/activities/multimedias">Multimedia</a></li>
+                <li class="<?php echo e((Request::is('materials') ? 'active-nav ' : '')); ?>" ><a href="/materials" style="padding-right:0;">Materiales </a></li>
+                <li class="dropdown hidden-xs <?php echo e((Request::is('materials') ? 'active-nav' : '')); ?>">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="/materials"><i class="fa fa-flag fa-fw"></i>&nbsp; Todos </a></li>
+                    <li class="divider"></li>
+                    <?php foreach($materialsmenu as $key => $value): ?>
+                      <li><a id="submenu_material_type" href="<?php echo e(route('materials.all_of_type',$key)); ?>"><?php echo e($value); ?></a></li>
+                    <?php endforeach; ?>
+                  </ul>
+                </li>   
+                <li class="<?php echo e((Request::is('materials') ? '' : '')); ?>" ><a href="" style="padding-right:0; ">Nosotros </a></li>
+                <li class="dropdown hidden-xs <?php echo e((Request::is('materials') ? '' : '')); ?>">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-caret-down"></i>
+                  </a>
+                  <ul class="dropdown-menu pull-right">
+                    <li><a href="#">Hidekel</a></li>
+                    <li><a href="#">Clubes</a></li>
+                    <li><a href="#">Directivas</a></li>
+                  </ul>
+                </li> 
+                        <?php if(Auth::guest()): ?>
+                            <li><a href="#contact">Contacto</a></li>
+                            <li><a href="/auth/login">Login</a></li>
+                        <?php else: ?>
+                            <li class="<?php echo e((Request::is('admin/*') ? 'active-nav' : '')); ?>" ><a href="/admin/welcome">Administrar</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo e(Auth::user()->email); ?> <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/auth/logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
+                    <?php echo $__env->yieldContent('menu-user'); ?>
+              </ul>
+
+            </div>
+          </div>
+        </nav>
+      </div>    
+      <div class="content" style=" margin-top:60px;">
+        <?php echo $__env->yieldContent('content'); ?>
+      </div>
+      <div id="location-browser" style="display:none"></div>
+      <br>
+       <hr class="featurette-divider">
+      <!-- FOOTER -->
+      <div class="row" style="width:100%;">
+      <footer>
+      <center>
+        <p>&copy; &nbsp;Copyright 2015 &nbsp; Clubes Hidekel &nbsp; &nbsp; |  &nbsp; &nbsp; By  &nbsp; &nbsp;- &nbsp; &nbsp; <a href="http://www.yomatica.com">yomatica</a> </p>
+        </center>
+      </footer>
+      </div>
+    <!-- jQuery -->
+
+    <?php echo Html::script('js/jquery.js'); ?>
+
+    <!-- Bootstrap Core JavaScript -->
+    <?php echo Html::script('js/bootstrap.min.js'); ?>   
+    
+    <?php echo Html::script('http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js'); ?>
+
+    <?php echo Html::script('js/bootstrap-image-gallery.min.js'); ?>
+
+    <?php echo Html::script('https://blueimp.github.io/Gallery/js/blueimp-gallery-youtube.js'); ?>      
+    <?php echo Html::script('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places'); ?>
+
+    <?php echo $__env->yieldContent('scripts'); ?>    
+    <?php echo Html::script('js/jquery.countdown.min.js'); ?>
+
+    <?php echo Html::script('js/bootbox.min.js'); ?>
+
+    <?php echo Html::script('js/main.js'); ?>
+
+    <?php echo Html::script('js/google-maps.js'); ?>
+
+</body>
+
+</html>

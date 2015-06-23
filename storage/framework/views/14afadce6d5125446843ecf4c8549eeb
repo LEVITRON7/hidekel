@@ -1,0 +1,104 @@
+<?php $__env->startSection('styles'); ?>
+    <?php echo Html::style('css/bootstrap-datetimepicker.min.css'); ?> 
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('menu-user'); ?>    
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+
+<div class="container"  style=" margin-top:60px;">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar border-right">
+        <h3>Opciones principales</h3>          
+        <div class="list-group">        
+            <a href="/admin/members"  class="list-group-item <?php echo e((Request::is('admin/members*') ? 'active' : '')); ?>">
+            Miembros <?php  if(Request::is("admin/members*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?></a>
+            <?php if(Auth::user()->type != 'admin'): ?>
+            <?php else: ?>
+            <a href="/admin/users" class="list-group-item <?php echo e((Request::is('admin/users*') ? 'active' : '')); ?>">
+            Usuarios <?php  if(Request::is("admin/users*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?></a>
+            <?php endif; ?>
+            <a href="/admin/events"     class="list-group-item <?php echo e((Request::is('admin/events*') ? 'active' : '')); ?>" >
+            Próximos eventos  <?php  if(Request::is("admin/events*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?></a>
+            <a href="/admin/activities" class="list-group-item <?php echo e((Request::is('admin/activities*') ? 'active' : '')); ?>" >
+            Actividades <?php  if(Request::is("admin/activities*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?></a>
+
+            <a href="/admin/materials"  class="list-group-item <?php echo e((Request::is('admin/materials*') ? 'active' : '')); ?>">Materiales
+            <?php  if(Request::is("admin/materials*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?>
+            </a>
+            
+            <a href="/admin/materials/types"  class="list-group-item" ><small>Tipos  </small> <?php  if(Request::is("admin/materials/types*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?> </a>
+            
+            <a href="/admin/materials/topics"  class="list-group-item"> <small>Tópicos  </small><?php  if(Request::is("admin/materials/topics*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?></a>
+            
+            <a href="/admin/clubs"      class="list-group-item <?php echo e((Request::is('admin/clubs*') ? 'active' : '')); ?>">
+            Clubs  <?php  if(Request::is("admin/clubs*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?></a>
+            
+            <a href="/admin/clubs/roles"  class="list-group-item" ><small>Roles  </small> <?php  if(Request::is("admin/clubs/roles*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?> </a>
+            
+            <a href="/admin/clubs/classes"  class="list-group-item"> <small>Classes  </small><?php  if(Request::is("admin/clubs/classes*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?></a>
+            
+            <a href="/admin/clubs/ideals"  class="list-group-item"> <small>Ideales  </small><?php  if(Request::is("admin/clubs/ideals*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?></a>
+
+            <a href="/admin/slides"     class="list-group-item <?php echo e((Request::is('admin/slides*') ? 'active' : '')); ?>">
+            Slides <?php  if(Request::is("admin/slides*")){echo '&nbsp;<i class="fa fa-arrow-right"></i>';}?></a>
+        </div>
+        </div>
+        <div class="col-sm-6 col-md-8">
+        <?php if(Session::has('messages')): ?>
+            <div class="alert alert-success">
+                <?php echo e(Session::get('messages')); ?>
+
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>            
+        </div>
+
+    <?php echo $__env->yieldContent('side-center'); ?>
+
+        <div class="col-sm-3 col-md-2 sidebar border-left fixme">
+
+          <ul class="nav nav-sidebar">
+           <?php if(isset($menu)): ?>
+            <h3>Opciones</h3>
+                <?php foreach($menu as $item): ?>
+
+                <<?php echo e($item['type']); ?> href="<?php echo e($item['href']); ?>" class="<?php echo e($item['class']); ?>"><?php if(!empty($item['i'])){ echo $item['i'];} ?><?php echo e($item['text']); ?></<?php echo e($item['type']); ?>>
+                <hr style="margin-top:10px;" />
+                <?php endforeach; ?>
+          <?php endif; ?>
+          <?php if(isset($members)&&Request::is('admin/members')): ?>
+                <br style="margin-top:10px;" />
+                <?php echo $__env->make('app.admin.members.filter', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php endif; ?>
+          <?php if(isset($activities)&&Request::is('admin/activities')): ?>
+                <br style="margin-top:10px;" />
+                <?php echo $__env->make('app.admin.activities.filter', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php endif; ?>
+          <?php if(isset($events)): ?>
+                <br style="margin-top:10px;" />
+                <?php echo $__env->make('app.admin.events.filter', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php endif; ?>
+          <?php if(isset($materials)): ?>
+                <br style="margin-top:10px;" />
+                <?php echo $__env->make('app.admin.materials.filter', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+          <?php endif; ?>
+          </ul>
+        </div>
+
+    </div>
+</div>
+
+<?php $__env->startSection('scripts'); ?>
+    <?php echo Html::script('js/fileinput.min.js'); ?>
+
+    <?php echo Html::script('js/fileinput_locale_es.js'); ?>
+
+    <?php echo Html::script('js/moment-with-locales.min.js'); ?>
+
+    <?php echo Html::script('js/bootstrap-datetimepicker.min.js'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,51 @@
+    <div class="form-group">                         
+        <?php echo Form::label('member', 'Miembro :', ['class' => 'col-md-4 control-label']); ?>
+
+        <div class="col-md-6">
+
+        <?php echo Form::select('member_id',$members,  <?php echo e($user ?: 'baz'); ?>, ['class' => 'form-control','type' =>'select']); ?>
+
+    
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo Form::label('email', 'Email :', ['class' => 'col-md-4 control-label']); ?>
+
+        <div class="col-md-6">
+        <?php echo Form::text('email',  null, ['class' => 'form-control','type' => 'email']); ?>
+
+        </div>
+    </div>
+
+    <div class="form-group">                         
+        <?php echo Form::label('password', 'Password :', ['class' => 'col-md-4 control-label']); ?>
+
+        <div class="col-md-6">
+        <?php echo Form::password('password', ['class' => 'form-control','type' => 'password']); ?>
+
+        </div>
+    </div>
+
+    <div class="form-group">                         
+        <?php echo Form::label('password', 'Confirm Password :', ['class' => 'col-md-4 control-label']); ?>
+
+        <div class="col-md-6">
+        <?php echo Form::password('password_confirmation',['class' => 'form-control','type' => 'password']); ?>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo Form::label('type', 'Tipo de usuario :', ['class' => 'col-md-4 control-label']); ?>
+
+        <div class="col-md-6">
+        
+        <?php if($user): ?>
+        <?php echo Form::select('type', $type,  $user->type , ['class' => 'form-control','type' =>'select']); ?>        
+        <?php else: ?>
+        <?php echo Form::select('type', $type,  'user' , ['class' => 'form-control','type' =>'select']); ?>
+
+        <?php endif; ?>  
+        </div>
+    </div>

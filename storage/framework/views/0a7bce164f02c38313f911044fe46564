@@ -1,0 +1,46 @@
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8 pagination-div">
+        <div  id="results">
+            <?php if($events->total() > 0): ?>
+            <?php foreach($events as $event): ?>
+            <hr>
+                <div class="row" style="padding:10px" id='<?php echo e($event->id); ?>'>
+                    <div class="col-md-3">
+                        <a href="">
+                            <center><img class="img-responsive img-max-list" src=
+                            <?php if($event->poster !=''): ?>
+                            "/images/posters/<?php echo e($event->poster); ?>"
+                            <?php else: ?>
+                            'http://placehold.it/300x200'
+                            <?php endif; ?>
+                            ></center>
+                        </a>
+                    </div>
+                    <div class="col-md-9 no-padding">
+                    <div class="col-md-12 no-padding">
+                        <div class="col-md-8 no-padding"><h4 id='id' class="no-padding" style="margin-top: 0px;margin-bottom: 5px;"><?php echo e($event->title); ?></h4></div>
+                        <div class="col-md-1 no-padding" style="color:#959595">
+                            <img src="/images/logos/<?php echo e($event->club->logo); ?>"  height="35" width="35">
+                        </div>
+                        <div class="col-md-3 no-padding" style="color:#959595">
+                        <div   data-countdown='<?php echo ($event->datetime_start); ?>' class="CountDown"  style="margin-top: 0px;font-size:1em;">
+                            </div>
+                        </div>
+                    </div>
+                        <h5 style="margin-top: 3px; margin-bottom:3px; font-style: oblique;"><?php echo e($event->address); ?></h5> <div style="color:#00A6FF;">  Del <?php echo e($event->date_between); ?></div>
+                        <p><?php echo e(str_limit($event->description, $limit = 100, $end = '...')); ?></p>
+                        <a class="btn btn-success" href=<?php echo e(route('admin.events.show', $event->id)); ?>><i class="fa fa-bars"></i>&nbsp;Detalles</a>
+                        <a class="btn btn-info" href=<?php echo e(route('admin.events.edit', $event->id)); ?>> <i class="fa fa-pencil-square-o"></i>&nbsp;Editar </a>
+                        <button class="btn btn-danger" href=<?php echo e(route('admin.events.delete', $event->id)); ?> value=<?php echo e($event->id); ?>> <i class="fa fa-trash"></i>&nbsp;Eliminar </button>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+                <center><?php echo $events->render(); ?>   <div style="float:right;"> Hay <?php echo e($events->total()); ?> registros</div> </center>
+            <?php else: ?>
+                <h3>No hay eventos próximos</h3>
+            <?php endif; ?>                
+        </div>
+        </div>
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

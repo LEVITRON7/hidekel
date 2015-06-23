@@ -1,0 +1,53 @@
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8">
+<!-- Team Members -->
+        <div class="row">
+             <br>
+            <div class="col-md-12 row-centered">
+                <div class="col-md-6 col-centered">
+                    <center class="show-image">
+                            <img class="img-responsive img-shadow member-photo" src=
+                                        <?php if($user->member->photo ==''): ?>
+                                            'http://placehold.it/500x300'
+                                        <?php else: ?>
+                                            '/images/photos/<?php echo e($member->photo); ?>'
+                                        <?php endif; ?>
+                             alt="">
+                            <a class="btn btn-primary" data-target='#myModalImage' data-toggle='modal' id='a-show-img'  >Ver imagen</a>
+                    </center>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <h3><?php echo e($user->email); ?></h3>
+                    <h4><?php echo e(isset($user->member->full_name) ? $user->member->full_name : "No asignado"); ?></h4>                
+                    <h5><?php echo e($user->type); ?></h5>
+                </div>
+ 
+            </div>
+<?php /* 
+            <div class="col-md-12 text-center">
+                <div class="thumbnail" >
+                    <img class="img-responsive img-thumbnail" src="<?php echo e(isset($user->member->photo) ? $user->member->photo : 'http://placehold.it/400x300'); ?>" alt="">
+                    <div class="caption">
+                        <h4><?php echo e($user->email); ?><br>
+                            <small><?php echo e(isset($user->member->full_name) ? $user->member->full_name : "No asignado"); ?></small>
+                            <small><?php echo e($user->type); ?></small>
+                            <small><?php echo e(isset($user->member->burn) ? $user->member->burn : 'No asignado'); ?></small>
+                        </h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div> */ ?>
+        </div>
+        <!-- /.row -->
+        </div>
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

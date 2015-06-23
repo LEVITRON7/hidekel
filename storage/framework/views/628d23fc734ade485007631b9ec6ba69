@@ -1,0 +1,67 @@
+<?php $__env->startSection('content'); ?>
+<div class="container pagination-div" >
+<!-- Team Members -->
+    <?php if((count($Activities) != 0)): ?>
+        <?php foreach($Activities as $activity): ?>                 
+            <?php $videos=[]; ?>
+            <?php if(count($activity->multimedias)!= 0): ?> 
+                <div class="col-md-12 text-center">
+                <h3 style="color:#00A6FF"><?php echo e($activity->title); ?></h3>  
+                <div class="row col-md-12" style=" margin: 0 auto;">
+                        <div id="links" >
+                        <?php if(count($activity->multimedias)!=0): ?>
+                        <h3> Fotos</h3>
+                            <?php foreach($activity->multimedias as $multimedia): ?>
+                                <?php if(($multimedia->type == 'Foto') and ($multimedia->file != '')): ?>
+                                <a href=/images/multimedia/<?php echo e($multimedia->file); ?>  data-gallery>
+                                    <img  class='img-responsive img-same-size'  src=/images/multimedia/<?php echo e($multimedia->file); ?> alt=>
+                                </a>
+                                <?php else: ?>                            
+                                <?php $videos[] = $multimedia->file;?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                        <h3> No hay videos ni fotos para mostrar</h3>
+                        <?php endif; ?>
+                        </div>
+                        <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-use-bootstrap-modal="false">
+                            <div class="slides"></div>
+                            <h3 class="title"></h3>
+                            <a class="prev">‹</a>
+                            <a class="next">›</a>
+                            <a class="close">×</a>
+                            <a class="play-pause"></a>
+                            <ol class="indicator"></ol>
+                        </div>
+                </div>
+                <div class=" row col-md-12 " style=" margin: 0 auto;">
+                    <?php if(!empty($videos)): ?>
+                        <h3 style=" margin-bottom: 0px;"> Videos</h3>
+                        <?php if(!empty($videos)){ echo implode("", $videos); } ?>
+                    <?php else: ?>
+
+                    <?php endif; ?>  
+                </div>
+                    <hr style=" margin: 0 auto;  border-top: 3px solid #ddd;">
+                </div>
+                
+            <?php else: ?>
+            <?php endif; ?>                    
+        <?php endforeach; ?>
+    <?php else: ?>
+    <br>
+        <center><h3>No hay actividades ni multimedia</h3></center>
+    <br>
+    <?php endif; ?>
+
+    <?php if(count($multimedias) == 0 ): ?>
+    <br>
+    <center><h3>No hay multimedia en las actividades</h3></center>
+    <br>
+    <?php endif; ?>
+
+</div>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

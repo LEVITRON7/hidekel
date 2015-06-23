@@ -1,0 +1,25 @@
+        <div style="float:right;"> Hay <?php echo e($ideals->total()); ?> registros</div>
+        <hr>
+        <?php if($ideals->total()>0): ?>
+        <h3>Ideales de club</h3>
+            <table class="table table-striped">
+                    <thead>
+                        <td class="col-md-3">Nombre</td>
+                        <td>Contenido</td>
+                        <td>Acciones</td>
+                    </thead>
+                <?php foreach($ideals as $ideal): ?>
+                    <tr id='<?php echo e($ideal->id); ?>'>
+                        <td id='id'><?php echo e($ideal->name); ?> <small style="color:gray">(<?php echo e($ideal->club->Full); ?>)</small></td>
+                        <td><?php echo e($ideal->value); ?></td>
+                        <td class="col-md-3">
+                        <a href=<?php echo e(route('admin.clubs.ideals.edit',$ideal->id )); ?> class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i>&nbsp;Editar</a> &nbsp;
+                        <button href=<?php echo e(route('admin.clubs.ideals.delete',$ideal->id )); ?> class="btn btn-danger btn-sm" value=<?php echo e($ideal->id); ?>><i class="fa fa-trash-o"></i>&nbsp;Eliminar </button>            
+                        </td>
+                    </tr>
+                <?php endforeach; ?>                
+            </table>
+            <center><?php echo $ideals->render(); ?> </center>
+        <?php else: ?>
+        <h3>No hay registros para mostrar</h3>
+        <?php endif; ?>

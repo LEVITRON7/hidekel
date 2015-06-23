@@ -1,0 +1,21 @@
+    <?php foreach($Materials as $material): ?>
+            <div class="col-md-6 col-sm-6 ">
+                <div class="thumbnail">                                
+                    <div class="caption">
+                    <div class="col-md-12  no-padding">
+                        <h4 class="col-md-10  no-padding"><?php echo e($material->name); ?> </h4> <div class="col-md-2"><img class="img-responsive"  src="/images/logos/<?php echo e($material->club->logo); ?>"  height="30" width="30"></div>
+                    </div>
+                        <h5 class="col-md-8 no-padding oblique"  ><?php echo e($material->topic->name); ?> </h5>  
+                        <h5 class="col-md-4 no-padding" style="color:gray ;text-align:right;"><?php echo e($material->type->name); ?></h5>
+                        <p><?php echo e(str_limit($material->description, $limit = 40, $end = '...')); ?></p>
+                        <center>
+                        <p>
+                            <a href=<?php echo e(route('materials.show', $material->id)); ?> class="btn btn-primary"><i class="fa fa-bars"></i>&nbsp;Detalles</a>
+                            <button  class="btn btn-default button-share" value=<?php echo e(route('materials.show', $material->id)); ?>><i class="fa fa-share-alt"></i>&nbsp;Compartir</button>
+                        </p>
+                        </center>
+                    </div>
+                </div>
+            </div>
+    <?php endforeach; ?>
+    <center><?php echo $Materials->render(); ?> <div style="float:right;"> Hay <?php echo e($Materials->total()); ?> registros</div></center>

@@ -1,0 +1,23 @@
+<div style="float:right;"> Hay <?php echo e($ideals->total()); ?> registros</div>        
+<hr>
+<center><h3>Ideales de club</h3></center>
+    <table class="table table-striped">
+            <thead>
+                <td class="col-md-3">Nombre</td>
+                <td>Contenido</td>
+                <td>Acciones</td>
+            </thead>
+        <?php foreach($ideals as $ideal): ?>
+            <tr id='<?php echo e($ideal->id); ?>'>
+                <td id='id'><?php echo e($ideal->name); ?> <h4><small  >(<?php echo e($ideal->club->Full); ?>)</small></h4>
+                </td>
+                <td><?php echo str_limit($ideal->value, $limit = 50, $end = '...'); ?></td>
+                <td class="col-md-5">
+                <a href=<?php echo e(route('admin.clubs.ideals.show',$ideal->id )); ?> class="btn btn-primary btn-sm"><i class="fa fa-bars"></i>Detalles</a> 
+                <a href=<?php echo e(route('admin.clubs.ideals.edit',$ideal->id )); ?> class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i>Editar</a> 
+                <button href=<?php echo e(route('admin.clubs.ideals.delete',$ideal->id )); ?> class="btn btn-danger btn-sm" value=<?php echo e($ideal->id); ?>><i class="fa fa-trash-o"></i>Eliminar </button>            
+                </td>
+            </tr>
+        <?php endforeach; ?>                
+    </table>
+    <center><?php echo $ideals->render(); ?> </center>

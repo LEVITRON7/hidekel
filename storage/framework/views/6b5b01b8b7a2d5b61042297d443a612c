@@ -1,0 +1,28 @@
+<div style="float:right;"> Hay <?php echo e($users->total()); ?> registros</div>
+<hr>
+<?php if($users->total()>0): ?>
+<h3>Usuarios</h3>
+    <table class="table table-striped">
+            <thead>
+                <td>Usuario</td>
+                <td>Miembro</td>
+                <td>Tipo</td>
+                <td>Accciones</td>
+            </thead>
+        <?php foreach($users as $user): ?>
+            <tr id='<?php echo e($user->id); ?>'>
+                <td id='id'><?php echo e($user->email); ?></td>
+                <td><?php echo e(isset($user->member->full_name) ? $user->member->full_name : "No asignado"); ?></td>
+                <td><?php echo e($user->type); ?></td>
+                <td class="col-md-5"> 
+ 
+                <a href=<?php echo e(route('admin.users.edit',$user->id )); ?> class="btn btn-info btn-sm">  <i class="fa fa-pencil-square-o"></i>&nbsp;Editar </a> 
+                <button href=<?php echo e(route('admin.users.delete',$user->id )); ?> class="btn btn-danger btn-sm" value=<?php echo e($user->id); ?>> <i class="fa fa-trash-o"></i>&nbsp;Eliminar </button>            
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+      <center><?php echo $users->render(); ?> </center>
+<?php else: ?>
+<h3>No hay registros para mostrar</h3>
+<?php endif; ?>

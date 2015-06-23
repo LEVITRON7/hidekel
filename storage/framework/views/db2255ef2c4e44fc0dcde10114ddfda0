@@ -1,0 +1,38 @@
+            <?php foreach($Events as $event): ?>
+            <hr>
+                <div class="row" style="padding:10px" id='<?php echo e($event->id); ?>'>
+                    <div class="col-md-3">
+                        <a href="">
+                            <center><img class="img-responsive img-max-list img-shadow" src=
+                            <?php if($event->poster !=''): ?>
+                            "/images/posters/<?php echo e($event->poster); ?>"
+                            <?php else: ?>
+                            'http://placehold.it/300x200'
+                            <?php endif; ?>
+                            ></center>
+                        </a>
+                    </div>
+                    <div class="col-md-9 no-padding">
+                        <div class="col-md-12 no-padding">
+                            <div class="col-md-7 no-padding"><h3 id='id' class="no-padding" style="margin-top: 0px;margin-bottom: 5px;"><?php echo e($event->title); ?></h3></div>
+                            <div class="col-md-1 no-padding" style="color:#959595">
+                                <img src="/images/logos/<?php echo e($event->club->logo); ?>"  height="35" width="35">
+                            </div>
+                            <div class="col-md-4 no-padding" style="color:#959595">
+                            <div   data-countdown='<?php echo ($event->datetime_start); ?>' class="CountDown"  style="margin-top: 0px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 no-padding">
+                            <div class="col-md-9 no-padding">
+                                <h5 style="margin-top: 3px; margin-bottom:3px; font-style: oblique;"><?php echo e($event->address); ?></h5> <div style="color:#00A6FF;">  Del <?php echo e($event->date_between); ?></div>                                
+                                <p><?php echo str_limit($event->description, $limit = 200, $end = '...'); ?></p>
+                            </div>
+                        </div>
+                            <a class="btn btn-success" href=<?php echo e(route('events.show', $event->id)); ?>><i class="fa fa-bars"></i>&nbsp;Detalles</a>
+                            <button  class="btn btn-default button-share" value=<?php echo e(route('events.show', $event->id)); ?>><i class="fa fa-share-alt"></i>&nbsp;Compartir</button>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+        <center><?php echo $Events->render(); ?> <div style="float:right;"> Hay <?php echo e($Events->total()); ?> registros</div></center>

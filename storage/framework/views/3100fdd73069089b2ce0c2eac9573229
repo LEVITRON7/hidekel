@@ -1,0 +1,34 @@
+<div  id="results">
+<div style="float:right;"> Hay <?php echo e($members->total()); ?> registros</div> 
+<hr>
+    <table class="table table-striped" >
+            <thead>
+                <td>Nombre</td>
+                <td>Rol</td>
+                <td>Género</td>
+                <td>Accciones</td>
+            </thead>
+                <?php foreach($members as $member): ?>
+                    <tr id = "<?php echo e($member->id); ?>"> 
+                        <td class="col-md-2">
+                            <img class="img-responsive img-shadow  " src=
+                                <?php if($member->photo ==''): ?>
+                                    'http://placehold.it/300x200'
+                                <?php else: ?>
+                                    '/images/photos/<?php echo e($member->photo); ?>'
+                                <?php endif; ?>
+                            >
+                        </td>
+                        <td> <h4 id="id" style="margin-top:5;margin-bottom:0;"><?php echo e($member->fullname); ?></h4><?php echo e($member->clubclass->name); ?> <small><?php echo e($member->user['email']); ?> </td>
+                        <?php /*<td><?php echo e($member->clubrole->role->name); ?>, <?php echo e($member->clubrole->club->type); ?></td>!*/ ?>
+                        <td ><?php echo e($member->role->name); ?> <br> <?php echo e($member->clubclass->club->type); ?></td>
+                        <td class="col-md-5"> 
+                        <a href=<?php echo e(route('admin.members.show',$member->id )); ?> class="btn btn-primary btn-sm"> <i class="fa fa-bars"></i>&nbsp;Detalles </a>
+                        <a href=<?php echo e(route('admin.members.edit',$member->id )); ?> class="btn btn-info btn-sm"> <i class="fa fa-pencil-square-o"></i>&nbsp;Editar </a>
+                        <button href=<?php echo e(route('admin.members.delete',$member->id )); ?> class="btn btn-danger btn-sm" value=<?php echo e($member->id); ?>> <i class="fa fa-trash-o"></i>&nbsp;Eliminar </button>            
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+    </table>        
+      <center><?php echo $members->render(); ?> </center>
+</div>

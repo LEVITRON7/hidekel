@@ -1,0 +1,21 @@
+<hr>
+<div style="float:right;"> Hay <?php echo e($MaterialsTypes->total()); ?> registros</div>
+    <center><h3>Tipos de materiales</h3></center>
+    <table class="table table-striped">
+            <thead>
+                <td>Id</td>
+                <td>Nombre</td>
+                <td>Accciones</td>
+            </thead>
+        <?php foreach($MaterialsTypes as $type): ?>
+            <tr id='<?php echo e($type->id); ?>'>
+                <td><?php echo e($type->id); ?></td>
+                <td id='id'><?php echo e($type->name); ?></td>
+                <td class="col-md-3">
+                <a href=<?php echo e(route('admin.materials.types.edit',$type->id )); ?> class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i>Editar </a>
+                <button href=<?php echo e(route('admin.materials.types.delete',$type->id )); ?> class="btn btn-danger btn-sm" value=<?php echo e($type->id); ?>><i class="fa fa-trash-o"></i> Eliminar </button>            
+                </td>
+            </tr> 
+        <?php endforeach; ?>                
+    </table>
+    <center><?php echo $MaterialsTypes->render(); ?> </center>

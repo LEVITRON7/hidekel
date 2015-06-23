@@ -1,0 +1,51 @@
+        <div  id="results">
+        <hr>
+            <?php if($activities->total() > 0): ?>
+                <?php foreach($activities as $activity): ?>
+                <hr>
+                    <div class="row" style="padding:10px">
+                        <div class="col-md-3">
+                            <a href="">
+                                <center><img class="img-responsive img-max-list " src= 
+                                    <?php if($activity->poster == ''): ?>
+                                        'http://placehold.it/300x200'
+                                    <?php else: ?>
+                                        '/images/posters/<?php echo e($activity->poster); ?>'
+                                    <?php endif; ?>
+                                ></center>                            
+                            </a>
+                        </div>
+                        <div class="col-md-9 no-padding">
+                        <div class="col-md-12 no-padding">
+                            <div class="col-md-8 no-padding"><h4 id='id' class="no-padding" style="margin-top: 0px;"><?php echo e($activity->title); ?></h4></div>
+                            <div class="col-md-1 no-padding" style="color:#959595"> 
+                                <img src="/images/logos/<?php echo e($activity->club->logo); ?>"  height="35" width="35">
+                            </div>
+                            <div class="col-md-3 no-padding" style="color:#959595"> <h4  class="defaultCountdown"  style="margin-top: 0px;  "><?php
+                                $datetime1 = new DateTime($activity->datetime_end);
+                                $datetime2 = new DateTime('now');
+                                $interval = $datetime2->diff($datetime1);
+                                $days = $interval->format('%R%a días y %H horas');
+                                 if($days < 0 ){
+                                    echo $interval->format('Hace %a días');
+                                }else{
+                                    echo  'En curso...';
+                                }                       
+                            ?></h4>
+                            </div>
+                        </div>
+                            <h5 style="margin-top: 3px; margin-bottom:3px; font-style: oblique;"><?php echo e($activity->address); ?></h5> <div style="color:#00A6FF;">  Del <?php echo e($activity->date_between); ?></div>
+                            <p><?php echo e($activity->description); ?></p>
+                            <a class="btn btn-primary" href=<?php echo e(route('admin.activities.show', $activity->id)); ?>><i class="fa fa-bars"></i>&nbsp;Detalles</a>
+                            <a class="btn btn-success btn-sm" href=<?php echo e(route('admin.activities.add_multimedia', $activity->id)); ?>><i class="fa fa-play"></i> Ver Multimedia</a>
+                            <a class="btn btn-info btn-sm" href=<?php echo e(route('admin.activities.add_multimedia', $activity->id)); ?>><i class="fa fa-pencil-square-o"></i>&nbsp;Editar Multimedia</a>
+                            <a class="btn btn-info btn-sm" href=<?php echo e(route('admin.activities.edit', $activity->id)); ?>> <i class="fa fa-pencil-square-o"></i> Editar </a>
+                            <button class="btn btn-danger btn-sm" href=<?php echo e(route('admin.activities.delete', $activity->id)); ?> value=<?php echo e($activity->id); ?>> <i class="fa fa-trash"></i> Eliminar </button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <center><?php echo $activities->render(); ?> <div style="float:right;"> Hay <?php echo e($activities->total()); ?> registros</div></center>
+            <?php else: ?>
+                <h3>No hay ninguna actividad</h3>
+            <?php endif; ?>
+        </div>

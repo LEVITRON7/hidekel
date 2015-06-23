@@ -1,0 +1,44 @@
+<?php $__env->startSection('content'); ?>
+<div class="container" >
+       <!-- Page Features -->
+        <div class="col-md-12" style="margin-top:10px;">
+            <div class="col-md-9 pagination-div" id='results'>
+                <?php if(count($Materials) != 0): ?>
+                    <?php foreach($Materials as $material): ?>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="thumbnail">                                
+                                <div class="caption">
+                                <div class="col-md-12  no-padding">
+                                    <h4 class="col-md-10  no-padding"><?php echo e($material->name); ?> </h4> <div class="col-md-2"><img class="img-responsive"  src="/images/logos/<?php echo e($material->club->logo); ?>"  height="30" width="30"></div>
+                                </div>
+                                    <h5 class="col-md-8 no-padding oblique"  ><?php echo e($material->topic->name); ?> </h5>  
+                                    <h5 class="col-md-4 no-padding" style="color:gray ;text-align:right;"><?php echo e($material->type->name); ?></h5>
+                                    <p><?php echo e(str_limit($material->description, $limit = 40, $end = '...')); ?></p>
+                                    <center>
+                                    <p>
+                                        <a href="#" class="btn btn-primary"><i class="fa fa-bars"></i>&nbsp;Detalles</a> <a href="#" class="btn btn-default">Compartir</a>
+                                    </p>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+
+                <div class="col-md-12">
+                    
+                </div>
+                <?php else: ?>
+                <h3>No hay materiales para mostrar</h3>
+                <?php endif; ?>
+            </div>
+            <div class="col-md-3">
+                <?php echo $__env->make('app.materials.filter', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            </div>
+        </div>
+</div>
+<?php $__env->stopSection(); ?>
+
+
+
+
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

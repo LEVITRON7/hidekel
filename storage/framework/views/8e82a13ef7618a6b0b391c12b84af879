@@ -1,0 +1,90 @@
+<?php $__env->startSection('content'); ?>
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style=" margin-top:-10px;">
+      <!-- Indicators -->
+    <div class="carousel-inner" role="listbox">
+
+        <?php $i=0; ?>
+        <?php foreach($ar as $a): ?>
+            <?php if($i==0): ?>
+                <div class="item active">
+
+                    <img class="img" src=
+                    <?php if($a->file== ''): ?>
+                        'http://placehold.it/1200x600'
+                    <?php else: ?>
+                        '/images/slides/<?php echo e($a->file); ?>'
+                    <?php endif; ?>
+                    >
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>  <?php echo e($a->title); ?> </h1>
+                            <p><?php echo e($a->description); ?> </p>
+                            <p><a class="btn btn-lg btn-primary" href="#" role="button">See more</a></p>
+                        </div>
+                    </div>
+                </div>
+            <?php else: ?>
+                <div class="item">
+                    <img class="img" src=
+                    <?php if($a->file== ''): ?>
+                        'http://placehold.it/1200x600'
+                    <?php else: ?>
+                        '/images/slides/<?php echo e($a->file); ?>'
+                    <?php endif; ?>
+                    >
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>  <?php echo e($a->title); ?> </h1>
+                            <p><?php echo e($a->description); ?> </p>
+                            <p><a class="btn btn-lg btn-primary" href="#" role="button">See more</a></p>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php $i++; ?>
+        <?php endforeach; ?>
+    </div>
+
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div><!-- /.carousel -->
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class=" ">
+    <center>
+        <?php foreach($clubs as $club): ?>
+        <div class="col-lg-4">
+            <img class="img" src=
+            <?php if($club->logo == ''): ?>
+                'http://placehold.it/300x200'
+            <?php else: ?>
+                '/images/logos/<?php echo e($club->logo); ?>'
+            <?php endif; ?>
+            style="width: 140px; height: 140px;">
+
+            <h2><?php echo e($club->type); ?><br><?php echo e($club->name); ?></h2>
+            <p><?php echo e($club->description); ?></p>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <?php endforeach; ?>
+    </center>
+    </div><!-- /.row -->
+ </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

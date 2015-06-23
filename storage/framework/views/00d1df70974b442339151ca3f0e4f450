@@ -1,0 +1,30 @@
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8">
+<!-- Team Members -->
+        <div class="row">
+ 
+            <div class="col-md-12 text-center">
+                <div class="thumbnail" >
+                    <img class="img-responsive img-thumbnail" src="<?php echo e($image->file); ?>" alt="">
+                    <div class="caption">
+                        <h4><h3><?php echo e($image->title); ?></h3>
+                            <small><?php echo e($image->event->title); ?></small>                            
+                        </h4>
+                        <p><?php echo e($image->description); ?></p>
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-2x fa-linkedin-square"></i></a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-2x fa-twitter-square"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        </div>
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

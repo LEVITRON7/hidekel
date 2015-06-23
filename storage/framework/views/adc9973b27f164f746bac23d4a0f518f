@@ -1,0 +1,25 @@
+<div style="float:right;"> Hay <?php echo e($roles->total()); ?> registros</div>
+    <hr>
+    <?php if($roles->total()>0): ?>
+    <h3>Roles de club</h3>
+        <table class="table table-striped">
+                <thead>
+                    <td>Id</td>
+                    <td>Nombre</td>
+                    <td>Acciones</td>
+                </thead>
+            <?php foreach($roles as $role): ?>
+                <tr id='<?php echo e($role->id); ?>'>
+                    <td><?php echo e($role->id); ?></td>
+                    <td id='if'><?php echo e($role->name); ?></td>
+                    <td class="col-md-3">
+                    <a href=<?php echo e(route('admin.clubs.roles.edit',$role->id )); ?> class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i></i>&nbsp;Editar </a>
+                    <button href=<?php echo e(route('admin.clubs.roles.delete',$role->id )); ?> class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>&nbsp;Eliminar </button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>                
+        </table>
+        <center><?php echo $roles->render(); ?> </center>
+    <?php else: ?>
+    <h3>No hay registros para mostrar</h3>
+    <?php endif; ?>

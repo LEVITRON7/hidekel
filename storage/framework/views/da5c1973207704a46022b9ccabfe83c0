@@ -1,0 +1,28 @@
+<div style="float:right;"> Hay <?php echo e($slides->total()); ?> registros</div>
+<hr> 
+    <?php foreach($slides as $slide): ?>
+        <div class="row" style="padding:10px" id='<?php echo e($slide->id); ?>'>
+            <div class="col-md-3">
+                <a href="#">
+                    <img class="img-responsive" src=
+                    <?php if($slide->file !=''): ?>
+                    "/images/slides/<?php echo e($slide->file); ?>"
+                    <?php else: ?>
+                    'http://placehold.it/300x200'
+                    <?php endif; ?>
+                     >
+                </a>
+            </div>
+            <div class="col-md-8 ">
+                <h4 style="margin-top: 0px; margin-bottom:0px;"><?php echo e($slide->title); ?></h4>
+                <div style="color:#00A6FF;" id ='id'> <?php echo e($slide->event->title); ?></div>
+                <p><?php echo e($slide->description); ?></p>
+                <a class="btn btn-primary" href=<?php echo e(route('admin.slides.show', $slide->id)); ?>>  <i class="fa fa-bars"></i>&nbsp;Detalles </a>
+                <a class="btn btn-info" href=<?php echo e(route('admin.slides.edit', $slide->id)); ?>><i class="fa fa-pencil-square-o"></i>&nbsp;Editar </a>
+                <button class="btn btn-danger" href=<?php echo e(route('admin.slides.delete', $slide->id)); ?> value=<?php echo e($slide->id); ?>> <i class="fa fa-trash-o"></i>&nbsp;Eliminar </button>
+            </div>
+        </div>
+    <?php endforeach; ?>
+        <center><?php echo $slides->render(); ?> </center>
+
+        

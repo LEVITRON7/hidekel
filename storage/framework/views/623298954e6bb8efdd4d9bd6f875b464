@@ -1,0 +1,32 @@
+<div style="float:right;"> Hay <?php echo e(count($materials)); ?> registros</div>
+<hr>
+<?php if(count($materials) !== 0): ?>
+    <table class="table table-striped">
+            <thead>
+                <td>Material</td>
+                <td>Tipo</td>
+                <td>Accciones</td>
+            </thead>
+            <?php foreach($materials as $material): ?>
+                <tr id = '<?php echo e($material->id); ?>' >
+                    <td > <h4 id="id" style="margin-top:5;margin-bottom:0;"><?php echo e($material->name); ?></h4>
+                    <?php if(($material->file!='') and ($material->extension != 'youtube.com')): ?>
+                    <a href="/files/materials/<?php echo e($material->file); ?>">Descargar</a>
+                    <?php elseif($material->extension == 'youtube.com'): ?>
+                    <small>Es un video </small>
+                    <?php else: ?>
+                    <small>No hay archivo </small>
+                    <?php endif; ?>
+                    </td>
+                    <td><?php echo e($material->type->name); ?> <br><?php echo e($material->topic->name); ?> </td>
+                    <td class="col-md-5"> 
+                    <a href=<?php echo e(route('admin.materials.show',$material->id )); ?> class="btn btn-primary btn-sm"><i class="fa fa-bars"></i>&nbsp;Detalles</a> &nbsp;
+                    <a href=<?php echo e(route('admin.materials.edit',$material->id )); ?> class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i> &nbsp; Editar </a>  &nbsp;
+                    <button href=<?php echo e(route('admin.materials.delete',$material->id )); ?> class="btn btn-danger btn-sm" value=<?php echo e($material->id); ?>> <i class="fa fa-trash-o"></i> &nbsp;Eliminar </button>            
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+    </table>
+<?php else: ?>
+    <h3>No se encontró ningun resultado</h3>
+<?php endif; ?>

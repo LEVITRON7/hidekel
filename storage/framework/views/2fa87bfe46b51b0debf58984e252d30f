@@ -1,0 +1,77 @@
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8">
+<!-- Team Members -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+            <div class="row">
+                <div class="col-md-12">
+                <div class="col-md-9 border-right">
+                        <h3 ><?php echo e($event->title); ?></h3>
+                        <h4> <?php echo e($event->club->type); ?>&nbsp; <?php echo e($event->club->name); ?></h4>
+                        <h4> <?php echo e($event->address); ?></h4>
+                        <h4 style="color:#00A6FF;"><?php echo e($event->date_between); ?></h4>
+                </div>
+                <div class="col-md-3">
+                <br>                
+                        <a class="btn btn-primary full-width" ><i class="fa fa-road"></i> &nbsp;Como llegar</a>
+                        <a class="btn btn-default full-width" > <i class="fa fa-share-alt"></i> &nbsp;Compartir</a>
+                        <a class="btn btn-info full-width" href=<?php echo e(route('admin.events.edit', $event->id)); ?>> <i class="fa fa-pencil-square-o"></i>&nbsp;Editar </a>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                        <p><?php echo e($event->description); ?>
+
+                        </p>
+                </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div id="map_canvas" style="height: 300px;"></div> 
+                </div>
+                <div class="row">
+                </div>
+            </div>
+            <div class="col-md-6 no-padding no-margin" >
+            <center class="show-image">
+                    <img class="img-responsive img-max-show" src=
+                        <?php if($event->poster !=''): ?>
+                        "/images/posters/<?php echo e($event->poster); ?>"
+                        <?php else: ?>
+                        'http://placehold.it/400x300'
+                        <?php endif; ?>
+                     alt="">           
+            <a class="btn btn-primary" data-target='#myModalImage' data-toggle='modal' id='a-show-img'  >Ver imagen</a>
+            </center>                     
+            </div>
+            </div>
+        </div>
+        <!-- /.row -->
+            <div class="modal fade" id="myModalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">  <?php echo e($event->title); ?></h3>
+                  </div>
+                  <div class="modal-body-image">
+                    <center>
+                      <img class="img-responsive" src=
+                        <?php if($event->poster !=''): ?>
+                        "/images/posters/<?php echo e($event->poster); ?>"
+                        <?php else: ?>
+                        'http://placehold.it/400x300'
+                        <?php endif; ?>
+                       alt="">
+                   </center>
+                  </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

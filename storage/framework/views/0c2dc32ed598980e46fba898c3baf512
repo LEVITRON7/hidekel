@@ -1,0 +1,32 @@
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8 pagination-div" >
+            <?php if($MaterialsTopics->total() > 0): ?>
+            <hr>
+            <div style="float:right;"> Hay <?php echo e($MaterialsTopics->total()); ?> registros</div>
+            <center><h3>Tópicos de materiales</h3></center>
+                <table class="table table-striped">
+                        <thead>
+                            <td>Id</td>
+                            <td>Nombre</td>
+                            <td>Accciones</td>
+                        </thead>
+                    <?php foreach($MaterialsTopics as $topic): ?>
+                        <tr id='<?php echo e($topic->id); ?>'>
+                            <td><?php echo e($topic->id); ?></td>
+                            <td id='id'><?php echo e($topic->name); ?></td>
+                            <td class="col-md-3">
+                            <a href=<?php echo e(route('admin.materials.topics.edit',$topic->id )); ?> class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i>Editar </a>
+                            <button href=<?php echo e(route('admin.materials.topics.delete',$topic->id )); ?> class="btn btn-danger btn-sm" value=<?php echo e($topic->id); ?>><i class="fa fa-trash-o"></i> Eliminar </button>            
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>                
+                </table>
+                <center><?php echo $MaterialsTopics->render(); ?> </center>
+            <?php else: ?>
+                <center><h3>No hay tópicos de materiales</h3></center>
+                <br>
+                <center><a href="<?php echo e(route('admin.materials.topics.create')); ?>" class="btn btn-primary"><i class="fa fa-plus"></i>Agregar tópico de material</a></center>
+            <?php endif; ?>
+        </div>
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,31 @@
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8 pagination-div">
+        <div style="float:right;"> Hay <?php echo e($clubs->total()); ?> registros</div>
+        <hr>
+            <?php foreach($clubs as $club): ?>
+                <div class="row" style="padding:10px" id='<?php echo e($club->id); ?>'>
+                    <div class="col-md-3">
+                        <a href="portfolio-item.html">
+                            <img class="img-responsive   " src=
+                                <?php if($club->logo == ''): ?>
+                                    'http://placehold.it/300x200'
+                                <?php else: ?>
+                                    '/images/logos/<?php echo e($club->logo); ?>'
+                                <?php endif; ?>
+                            >
+                        </a>
+                    </div>
+                    <div class="col-md-9">
+                        <h4 style="margin-top: 0px; margin-bottom:0px;" id ='id'><?php echo e($club->type); ?></h4>
+                        <h5 style="margin-top: 3px; margin-bottom:3px; font-style: oblique;"><?php echo e($club->name); ?>   </h5> 
+                        <p><?php echo e($club->description); ?></p>
+                        <a class="btn btn-primary" href=<?php echo e(route('admin.clubs.show', $club->id)); ?>><i class="fa fa-bars"></i>&nbsp;Detalles </a>
+                        <a class="btn btn-info" href=<?php echo e(route('admin.clubs.edit', $club->id)); ?>><i class="fa fa-pencil-square-o"></i> &nbsp;Editar </a>
+                        <button class="btn btn-danger" href=<?php echo e(route('admin.clubs.delete', $club->id)); ?> value=<?php echo e($club->id); ?>><i class="fa fa-trash-o"></i>&nbsp;Eliminar </button>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+                <center><?php echo $clubs->render(); ?> </center>
+        </div>
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

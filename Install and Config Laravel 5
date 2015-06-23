@@ -1,0 +1,6 @@
+1.- Se instala composer
+2.- Se instala laravel
+3.- Se configura virtualroot
+4.- Se da permisos a storage
+5.- Condfiguracion de BD en .env
+6.- Creacion de migraciones y seeds

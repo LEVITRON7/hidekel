@@ -1,0 +1,66 @@
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8">
+<!-- Team Members -->
+        <div class="row">
+            <div class="col-md-12 text-center  " style="padding-bottom :10px; margin-bottom :10px;">
+                <div class="col-md-12 ">
+                        <h4><h3><?php echo e($club->type); ?></h3>
+                            <h4><?php echo e($club->name); ?></h4>
+                        </h4>
+                        <div class="col-md-6 col-centered">
+                            <img class="img-max-show " src=
+                                <?php if($club->logo == ''): ?>
+                                    'http://placehold.it/300x200'
+                                <?php else: ?>
+                                    '/images/logos/<?php echo e($club->logo); ?>'
+                                <?php endif; ?>
+                            alt="">
+                        </div>
+                    <div class="caption" style="margin-top:10px;"> 
+                        <div class="col-md-12 col-centered">
+                        <p style="text-align:justify"><?php echo $club->description; ?></p>
+                        </div>               
+                        <div class="col-md-12 row-centered">
+                        <?php if(count($club->ideals) != 0): ?>
+                            <br>
+                            <h3>Ideales de club</h3>
+                            <?php foreach($club->ideals as $ideal): ?>                            
+                                <div class="col-md-4">
+                               <center> <h4><?php echo e($ideal->name); ?> </h4></center>
+                                    <div class="col-md-12">
+                                    <p style="text-align:center;"> <?php echo $ideal->value; ?> </p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>                        
+                        </div>                         
+                        <div class="col-md-12 row-centered">
+                        <?php if(count($club->classes) != 0): ?>
+                            <br>
+                            <h3>Clases de club</h3>
+                            <?php foreach($club->classes as $class): ?>                           
+                                <div class="col-md-4">
+                                <center> <h4><?php echo e($class->name); ?> </h4></center>
+                                    <div class="col-md-10 col-centered" >
+                                            <img class="img-max-show"  src=
+                                                <?php if($class->logo == ''): ?>
+                                                    'http://placehold.it/300x200'
+                                                <?php else: ?>
+                                                    '/images/logos/<?php echo e($class->logo); ?>'
+                                                <?php endif; ?>
+                                            alt="">
+                                    </div>
+                                </div> 
+                            <?php endforeach; ?>
+                        <?php endif; ?> 
+                        </div>                      
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        </div>
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

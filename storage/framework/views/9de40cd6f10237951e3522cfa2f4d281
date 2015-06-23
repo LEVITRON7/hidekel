@@ -1,0 +1,25 @@
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8 pagination-div">
+        <div style="float:right;"> Hay <?php echo e($slide->total()); ?> registros</div>
+            <?php foreach($slide as $image): ?>
+            <hr>
+                <div class="row" style="padding:10px">
+                    <div class="col-md-3">
+                        <a href="#">
+                            <img class="img-responsive   " src=<?php echo e($image->file); ?> >
+                        </a>
+                    </div>
+                    <div class="col-md-8 ">
+                        <h4 style="margin-top: 0px; margin-bottom:0px;"><?php echo e($image->title); ?></h4>
+                        <div style="color:#00A6FF;"> <?php echo e($image->event->title); ?></div>
+                        <p><?php echo e($image->description); ?></p>
+                        <a class="btn btn-primary" href=<?php echo e(route('admin.slide.show', $image->id)); ?>>Más detalles </a>
+                        <a class="btn btn-info" href=<?php echo e(route('admin.slide.edit', $image->id)); ?>>Editar </a>
+                        <a class="btn btn-danger" href=<?php echo e(route('admin.slide.delete', $image->id)); ?>>Eliminar </a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+                <center><?php echo $slide->render(); ?> </center>
+        </div>
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

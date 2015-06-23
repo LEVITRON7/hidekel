@@ -1,0 +1,43 @@
+    
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8 pagination-div text-center" >
+        <div style="float:right;"> Hay <?php echo e($classes->total()); ?> registros</div>
+        <hr>
+        <?php if($classes->total()>0): ?>
+        <h3>Clases de club</h3>
+            <table class="table table-striped">
+                    <thead>
+                        <td>Id</td>
+                        <td>Nombre</td>
+                        <td>Logo</td>
+                        <td>Club</td>
+                        <td>Acciones</td>
+                    </thead>
+                <?php foreach($classes as $class): ?>
+                    <tr id='<?php echo e($class->id); ?>'>
+                        <td><?php echo e($class->id); ?></td>
+                        <td id='id'><?php echo e($class->name); ?></td>
+                        <td>
+                            <img class="img-responsive " height="50" width="50" src=
+                                <?php if($class->logo == ''): ?>
+                                    'http://placehold.it/300x200'
+                                <?php else: ?>
+                                    '/images/logos/<?php echo e($class->logo); ?>'
+                                <?php endif; ?>
+                            >
+                        </td>
+                        <td><?php echo e($class->club->type); ?> &nbsp; <?php echo e($class->club->name); ?></td>
+                        <td class="col-md-3">
+                        <a href=<?php echo e(route('admin.clubs.classes.edit',$class->id )); ?> class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o"></i>&nbsp;Editar</a> &nbsp;
+                        <button href=<?php echo e(route('admin.clubs.classes.delete',$class->id )); ?> class="btn btn-danger btn-sm" value=<?php echo e($class->id); ?>><i class="fa fa-trash-o"></i>&nbsp;Eliminar </button>            
+                        </td>
+                    </tr>
+                <?php endforeach; ?>                
+            </table>
+            <center><?php echo $classes->render(); ?> </center>
+        <?php else: ?>
+        <h3>No hay registros para mostrar</h3>
+        <?php endif; ?>
+        </div>
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,42 @@
+<?php $__env->startSection('content'); ?>
+<div class="container border-right border-left">
+       <!-- Page Features -->
+            <div class="col-md-12 text-center ">            
+            <div class="absolute"><a class="btn btn btn-default" href="<?php echo e(URL::previous()); ?>"> <i class="fa fa-arrow-left"></i>  Atras</a></div>
+                <div class="col-md-9 col-centered" >                
+                    <div class="col-md-12">
+                    <?php  echo ($preview_material);?>
+                    </div>            
+                    <div class="col-md-12">
+                        <div class="col-md-10 col-centered"><h3><?php echo e($material->name); ?></h3></div>
+                        <div class="caption">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <h4><?php echo e($material->type->name); ?> &nbsp;<img src="/images/logos/<?php echo e($material->club->logo); ?>"  height="35" width="35"></h4>
+                                <h4 class="" style="color:#00A6FF;">(<?php echo e($material->topic->name); ?>)
+                                <small><?php echo e($material->extension); ?></small>                                
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <h5>Subido por :  <?php echo e(isset($material->user->email) ? $material->user->email : 'Default'); ?> </h5>
+                                <?php if(($material->extension == 'youtube.com') or ($material->file == '')): ?>
+                                <h3></h3>
+                                <?php else: ?>
+                                <br>
+                                    <a class="btn btn btn-success" href="/files/materials/<?php echo e($material->file); ?>"> <i class="fa fa-download"></i>Descargar</a>
+                                <?php endif; ?>
+                                    <button  class="btn btn-default button-share" value=<?php echo e(route('materials.show', $material->id)); ?>><i class="fa fa-share-alt"></i>Compartir</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>                
+                </div>
+            </div>      
+</div>
+<br>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

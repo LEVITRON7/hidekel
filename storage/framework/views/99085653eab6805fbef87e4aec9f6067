@@ -1,0 +1,31 @@
+    <?php $__env->startSection('side-center'); ?>
+        <div class="col-sm-6 col-md-8">
+<!-- Team Members -->
+        <div class="row"> 
+            <div class="col-md-12 text-center">
+                <div class="col-md-12 text-center ">
+                    <img class="img-max-list" src=
+                        <?php if($ideal->club->logo == ''): ?>
+                            'http://placehold.it/300x200'
+                        <?php else: ?>
+                            '/images/logos/<?php echo e($ideal->club->logo); ?>'
+                        <?php endif; ?>
+                    alt="">
+                </div>
+                <div class="col-md-12 row-centered">
+                    <div class="col-md-12 col-centered">
+                    <center>
+                        <h2><?php echo e($ideal->name); ?></h2>
+                    </center>
+                    </div>
+                    <div class="col-md-6 col-centered" style="text-align:center">
+                        <p><?php echo e($ideal->value); ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        </div>
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('appadmin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

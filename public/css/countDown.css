@@ -1,0 +1,23 @@
+.CountDown{
+    background: gray;
+    color: #f8f8f8;
+    display: block;
+    font-size: 1.3em;
+    //overflow: hidden;
+    //position: absolute;
+    text-align: center;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    top: 0;
+    width: 80%;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transform-style: flat;
+    -moz-transform-style: flat;
+    -ms-transform-style: flat;
+    -o-transform-style: flat;
+    transform-style: flat;
+    border-radius: 3px;
+}
